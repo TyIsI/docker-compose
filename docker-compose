@@ -1,0 +1,11 @@
+#!/bin/sh
+
+COMPOSE_PROJECT_NAME=$($COMPOSE_PROJECT_NAME|basename $(pwd))
+
+docker run \
+       --rm \
+       -v $(pwd):/app \
+       -v /var/run/docker.sock:/var/run/docker.sock \
+       -v /etc:/etc:ro \
+       -e COMPOSE_PROJECT_NAME=$COMPOSE_PROJECT_NAME \
+       tyisi/docker-compose "$@"
